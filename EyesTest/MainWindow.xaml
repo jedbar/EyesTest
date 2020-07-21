@@ -1,0 +1,249 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EyesTest"
+        xmlns:Models="clr-namespace:EyesTest.Models" x:Class="EyesTest.MainWindow"
+        mc:Ignorable="d"
+        Title="EyesTest" Height="400" Width="800" Background="WhiteSmoke" Icon="Images/eye.png">
+
+
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition  />
+        </Grid.ColumnDefinitions>
+
+
+        <Menu x:Name="MyMenu" Width="Auto" Height="20"  Grid.Row="0" VerticalAlignment="Top">
+            <MenuItem Header="_Plik">
+                <MenuItem x:Name="AppExit" Header="Wyjście" HorizontalAlignment="Left" Width="140" Click="AppExit_Click" />
+            </MenuItem>
+            <MenuItem Header="_Pomoc">
+                <MenuItem x:Name="About" Header="O programie" HorizontalAlignment="Left" Width="160" Click="About_Click"/>
+            </MenuItem>
+        </Menu>
+
+        
+        <TabControl x:Name="MyTabControl" Grid.Row="1" Margin="10">
+            <!-- TAB 1 //////////////////////////////////////////////////////////////////////////////// -->
+            <TabItem x:Name="MyTabItem1" Header="Znajdź Pacjenta">
+                   
+
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="140" />
+                        <ColumnDefinition Width="15" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" Orientation="Vertical">
+                        <Label Content="ID" />
+                        <TextBox x:Name="txtId" Padding="5" TextChanged="txtId_TextChanged" MaxLength="10"/>
+                        <Label Content="Nazwisko" />
+                        <TextBox x:Name="txtLastName" Padding="5" TextChanged="txtLastName_TextChanged"/>
+                        <Label Content="Pesel"/>
+                        <TextBox x:Name="txtPesel" Padding="5" TextChanged="txtPesel_TextChanged" MaxLength="11"/>
+                        <Button x:Name="btnReset" Content="Wyczyść" Padding="5" Margin="0,25,0,0" Click="btnReset_Click"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Center">
+                        <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+                    </StackPanel>
+
+                    <DataGrid x:Name="MyDataGridFind" Grid.Column="2" AutoGenerateColumns="False" ItemsSource="{Binding}"
+                          CanUserResizeColumns="True" CanUserResizeRows="False" CanUserDeleteRows="False" CanUserAddRows="False"  CanUserReorderColumns="False"
+                          IsReadOnly="True" 
+                          SelectionMode="Single"
+                          Background="Transparent"
+                          BorderThickness="1" 
+                          BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"
+                          HeadersVisibility="Column" 
+                          MouseDoubleClick="MyGridFind_MouseDoubleClick"
+                          HorizontalGridLinesBrush="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" 
+                          VerticalGridLinesBrush="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}"
+                          >
+
+                        <DataGrid.Resources>
+                            <Style x:Key="DataGridMyText" TargetType="TextBlock">
+                                <Setter Property="Padding" Value="5" />
+                            </Style>
+                        </DataGrid.Resources>
+
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding ID}" MinWidth="40" ElementStyle="{StaticResource DataGridMyText}"/>
+                            <DataGridTextColumn Header="Imię" Binding="{Binding FirstName}" MinWidth="100" ElementStyle="{StaticResource DataGridMyText}" />
+                            <DataGridTextColumn Header="Nazwisko" Binding="{Binding LastName}" MinWidth="120" ElementStyle="{StaticResource DataGridMyText}"/>
+                            <DataGridTextColumn Header="Pesel" Binding="{Binding Pesel}" MinWidth="100" ElementStyle="{StaticResource DataGridMyText}"/>
+                            <DataGridTextColumn Header="Miejscowość" Binding="{Binding City}" MinWidth="120" ElementStyle="{StaticResource DataGridMyText}"/>
+                            <DataGridTextColumn Header="Telefon" Binding="{Binding PhoneNumber}" MinWidth="100" ElementStyle="{StaticResource DataGridMyText}"/>
+                        </DataGrid.Columns>
+
+                    </DataGrid>
+
+                </Grid>
+            </TabItem>
+
+            <!-- TAB 2 /////////////////////////////////////////////////////////////////////////////////-->
+            <TabItem x:Name="MyTabItem2" Header="Dodaj Pacjenta" Height="22" VerticalAlignment="Top">
+
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="20" />
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+
+                    <GroupBox Header="Wymagane" Grid.Row="0" Grid.Column="0">
+                        <Grid Margin="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="5"/>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="5"/>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="5"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="10" />
+                                <ColumnDefinition Width="150" />
+                            </Grid.ColumnDefinitions>
+                            
+                            <Label Content="Imię:" Grid.Row="0" Grid.Column="0" />
+                            <TextBox x:Name="txtAddFirstName" Grid.Row="0" Grid.Column="2" Padding="4" MaxLength="20"/>
+
+                            <Label Content="Nazwisko:" Grid.Row="2" Grid.Column="0" />
+                            <TextBox x:Name="txtAddLastName" Grid.Row="2" Grid.Column="2" Padding="4" MaxLength="20"/>
+
+                            <Label Content="Pesel:" Grid.Row="4" Grid.Column="0"/>
+                            <TextBox x:Name="txtAddPesel" Grid.Row="4" Grid.Column="2" Padding="4" MaxLength="11"/>
+
+
+                        </Grid>
+                    </GroupBox>
+
+                    <GroupBox Header="Opcjoinalne" Grid.Row="0" Grid.Column="2">
+                        <Grid Margin="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="5"/>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="5"/>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="5"/>
+                                <RowDefinition Height="25"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="10" />
+                                <ColumnDefinition Width="150" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label Content="Ulica:" Grid.Row="0" Grid.Column="0"/>
+                            <TextBox x:Name="txtAddStreet" Grid.Row="0" Grid.Column="2" Padding="4" MaxLength="20"/>
+
+                            <Label Content="Miasto:" Grid.Row="2" Grid.Column="0"/>
+                            <TextBox x:Name="txtAddCity" Grid.Row="2" Grid.Column="2" Padding="4" MaxLength="20"/>
+
+                            <Label Content="Kod Pocztowy:" Grid.Row="4" Grid.Column="0"/>
+                            <TextBox x:Name="txtAddZipCode" Grid.Row="4" Grid.Column="2" Padding="4" MaxLength="10"/>
+
+                            <Label Content="Numer Telefonu:" Grid.Row="6" Grid.Column="0"/>
+                            <TextBox x:Name="txtAddPhoneNumber" Grid.Row="6" Grid.Column="2" Padding="4" MaxLength="20"/>
+                        </Grid>
+                    </GroupBox>
+
+                    <Grid Margin="0,20,0,20" Grid.Row="1" Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="10" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="btnAddSubmit" Content="Dodaj" Grid.Row="0" Grid.Column="2" Padding="5" Click="btnAddSubmit_Click"/>
+                        <Button x:Name="btnAddReset" Content="Wyczyść" Grid.Row="0" Grid.Column="0" Padding="5" Click="btnAddReset_Click"/>
+                    </Grid>
+
+                    <Label x:Name="lblAddStatus" Content="" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center"/>
+
+                </Grid>
+            </TabItem>
+
+            <!-- TAB 3 //////////////////////////////////////////////////////////////////////////////// -->
+            <TabItem x:Name="MyTabItem3" Header="Zaplanowane Wizyty">
+   
+                    <Grid Margin="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="180" />
+                            <ColumnDefinition Width="15" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0" Orientation="Vertical">
+                        <Calendar x:Name="MyCalendarPV" SelectedDatesChanged="MyCalendarPV_SelectedDatesChanged"></Calendar>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Center">
+                            <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+                        </StackPanel>
+
+                        <DataGrid x:Name="MyDataGridApp" Grid.Column="2" AutoGenerateColumns="False" ItemsSource="{Binding}"
+                            CanUserResizeColumns="True" CanUserResizeRows="False" CanUserDeleteRows="False" CanUserAddRows="False"  CanUserReorderColumns="False"
+                            IsReadOnly="True" 
+                            SelectionMode="Single"
+                            Background="Transparent"
+                            BorderThickness="1" 
+                            BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"
+                            MouseDoubleClick="MyGridApp_MouseDoubleClick" 
+                            HeadersVisibility="Column" 
+                            HorizontalGridLinesBrush="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" 
+                            VerticalGridLinesBrush="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}"
+                            >
+
+                        <DataGrid.Resources>
+                            <Style x:Key="DataGridMyText" TargetType="TextBlock">
+                                <Setter Property="Padding" Value="5" />
+                            </Style>
+                        </DataGrid.Resources>
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Godzina" Binding="{Binding Timestamp, StringFormat='HH:mm'}" MinWidth="70" ElementStyle="{StaticResource DataGridMyText}"/>
+                            <DataGridTextColumn Header="Imię" Binding="{Binding Client.FirstName}" MinWidth="120" ElementStyle="{StaticResource DataGridMyText}"/>
+                            <DataGridTextColumn Header="Nazwisko" Binding="{Binding Client.LastName}" MinWidth="150" ElementStyle="{StaticResource DataGridMyText}"/>
+                            <DataGridTextColumn Header="ID" Binding="{Binding Client.ID}" MinWidth="60" ElementStyle="{StaticResource DataGridMyText}"/>
+                            <DataGridTextColumn Header="Telefon" Binding="{Binding Client.PhoneNumber}" MinWidth="120" ElementStyle="{StaticResource DataGridMyText}"/>
+                        </DataGrid.Columns>
+
+                    </DataGrid>
+                    </Grid>
+
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+
+</Window>

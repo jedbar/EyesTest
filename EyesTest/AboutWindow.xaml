@@ -1,0 +1,40 @@
+﻿<Window x:Class="EyesTest.AboutWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EyesTest"
+        mc:Ignorable="d"
+        Title="O Programie" Height="250" Width="300" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="Images/eye.png">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20" />
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="15" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="4" HorizontalAlignment="Center">
+            <Image Source="Images/eye.png" Width="40"/>
+            <Label Content="EyesTest" FontSize="24" FontWeight="Bold" ></Label>
+        </StackPanel>
+        <Label Content="Wersja:" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center"></Label>
+        <Label Content="1.0" Grid.Row="3" Grid.Column="3"></Label>
+
+        <Label Content="Autorzy:" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center"></Label>
+        <StackPanel Orientation="Vertical"  Grid.Row="4" Grid.Column="3">
+            <Label Content="w54171 - GP02"></Label>
+            <Label Content="w60109 - GP02"></Label>
+            <Label Content="w60138 - GP01"></Label>
+        </StackPanel>
+                    
+        
+    </Grid>
+</Window>
