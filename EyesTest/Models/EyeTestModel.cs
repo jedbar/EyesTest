@@ -22,7 +22,7 @@ namespace EyesTest.Models
 		/// <summary>
 		/// Method validates the eyetest object
 		/// </summary>
-		/// <returns>true on success or throws on error</returns>
+		/// <returns>true on success or throws an argument exception</returns>
 		public bool Validate()
 		{
 			if (Sph < -10.0 || Sph > 10.0)

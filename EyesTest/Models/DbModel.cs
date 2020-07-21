@@ -29,7 +29,7 @@ namespace EyesTest.Models
         /// </summary>
         /// <param name="sql">sql insert query</param>
         /// <param name="parameters">parameters used to bind the sql query</param>
-        /// <returns>last inserted row id</returns>
+        /// <returns>int last inserted row id</returns>
         protected int Insert(string sql, DynamicParameters parameters = null)
         {
             using (DbConnection = new SQLiteConnection(connectionString))
@@ -72,7 +72,7 @@ namespace EyesTest.Models
         /// <param name="limit">results limit number</param>
         /// <param name="offset">results offset number</param>
         /// <param name="order">results order descending or ascending</param>
-        /// <returns></returns>
+        /// <returns>IEnumerable<typeparamref name="T"/> query object</returns>
         protected IEnumerable<T> Query<T>(string sql, DynamicParameters parameters = null, int limit = 0, int offset = 0, string order = null)
         {
             using (DbConnection = new SQLiteConnection(connectionString))
@@ -108,7 +108,7 @@ namespace EyesTest.Models
         /// <param name="limit">results limit number</param>
         /// <param name="offset">results offset number</param>
         /// <param name="order">results order descending or ascending</param>
-        /// <returns></returns>
+        /// <returns>IEnumerable<typeparamref name="T"/> query object</returns>
         protected IEnumerable<T> Query<T,T2>(string sql, DynamicParameters parameters = null, int limit = 0, int offset = 0, string order = null)
         {
             using (DbConnection = new SQLiteConnection(connectionString))
@@ -142,7 +142,7 @@ namespace EyesTest.Models
                         }
                     }
                     return t;
-                }, parameters, splitOn: "ID").ToList();
+                }, parameters, splitOn: "ID");
             }
         }
 

@@ -23,7 +23,7 @@ namespace EyesTest.Models
         /// <summary>
         /// Method validates required attributes
         /// </summary>
-        /// <returns></returns>
+        /// <returns>true on success or throws an argument exception</returns>
         public bool Validate()
         {
             if (!Regex.IsMatch(FirstName, "^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]+$"))
